@@ -1,0 +1,76 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "PS Audio PowerPlant",
+        "description": "Enter the address of the PowerPlant. One status read is made to check it.",
+        "data": {
+          "host": "Host",
+          "name": "Name"
+        },
+        "data_description": {
+          "host": "IP address or host name of the PowerPlant.",
+          "name": "Name for the device in Home Assistant."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the PowerPlant. Check the address and that Home Assistant is allowed through the firewall to TCP port 80.",
+      "not_powerplant": "The device answered, but not like a PowerPlant.",
+      "no_mac": "The PowerPlant did not report its MAC address.",
+      "unknown": "Unexpected error. See the log."
+    },
+    "abort": {
+      "already_configured": "This PowerPlant is already set up."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Polling",
+        "data": {
+          "scan_interval": "Seconds between status reads"
+        },
+        "data_description": {
+          "scan_interval": "Minimum 30. The unit's network side can freeze if polled too often."
+        }
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "power": { "name": "Power" },
+      "zone_a": { "name": "Zone A" },
+      "zone_b": { "name": "Zone B" },
+      "zone_c": { "name": "Zone C" },
+      "zone_d": { "name": "Zone D (HC)" },
+      "zone_e": { "name": "Zone E (HC)" }
+    },
+    "sensor": {
+      "input_voltage": { "name": "Input voltage" },
+      "output_voltage": { "name": "Output voltage" },
+      "input_thd": { "name": "Input THD" },
+      "output_thd": { "name": "Output THD" },
+      "output_current": { "name": "Output current" },
+      "output_power": { "name": "Output power" },
+      "reported_watts": { "name": "Reported watts" },
+      "frequency": { "name": "Frequency" },
+      "temperature_1": { "name": "Temperature 1" },
+      "temperature_2": { "name": "Temperature 2" },
+      "dc_offset": { "name": "DC offset" },
+      "voltage_setting": { "name": "Voltage setting" },
+      "multiwave_strength": { "name": "MultiWave strength" },
+      "regulation_mode": { "name": "Regulation mode" },
+      "waveform": { "name": "Waveform" }
+    },
+    "binary_sensor": {
+      "mov_status": { "name": "MOV status" },
+      "unit_lockout": { "name": "Unit lockout" },
+      "outlet": { "name": "Outlet {number}" }
+    }
+  },
+  "exceptions": {
+    "command_failed": { "message": "The PowerPlant did not accept the command: {error}" },
+    "update_failed": { "message": "Could not read the PowerPlant: {error}" }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "domain": "psaudio_powerplant",
+  "name": "PS Audio PowerPlant",
+  "codeowners": [
+    "@johncarey70"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/johncarey70/ha-psaudio-powerplant",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/johncarey70/ha-psaudio-powerplant/issues",
+  "requirements": [],
+  "version": "0.2.0"
+}
