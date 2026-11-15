@@ -12,12 +12,12 @@ permissions:
 
 jobs:
   recreate:
-    if: contains(toJSON(github.event.head_commit.added), '.github/workflows/recreate-release.yml')
     runs-on: ubuntu-latest
     steps:
       - name: Recreate v0.2.0
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          NOTES='Initial public release. Power switch, 5 zone switches (A-E), 16 outlet status sensors, and measurements (voltage, current, THD, V×A output power, frequency, temperatures). Polls every 60 s. Tested on P20 firmware 0.01.25. Install via HACS custom repository (Integration).'
           gh release delete v0.2.0 --repo "${GITHUB_REPOSITORY}" --cleanup-tag -y || true
-          gh release create v0.2.0 --repo "${GITHUB_REPOSITORY}" --target "${GITHUB_SHA}" --title v0.2.0 --notes "Initial public release. Power switch, 5 zone switches (A-E), 16 outlet status sensors, and measurements (voltage, current, THD, V\u00d7A output power, frequency, temperatures). Polls every 60 s. Tested on P20 firmware 0.01.25. Install via HACS custom repository (Integration)."
+          gh release create v0.2.0 --repo "${GITHUB_REPOSITORY}" --target "${GITHUB_SHA}" --title v0.2.0 --notes "${NOTES}"
