@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Build Home Assistant brand icons from the official PS Audio logo.
+"""Build Home Assistant brand icons from the official PS Audio blue logo.
 
-Official sources (also stored as base64 under .github/brand-src/):
+Official source (also stored as base64 under .github/brand-src/):
 
-* Black mark, used as the psaudio.com header logo, favicon, and JSON-LD logo:
-  https://www.psaudio.com/cdn/shop/files/ps-logo-icon-black.png?v=1758450286
-* White mark, same artwork, for dark backgrounds:
-  https://www.psaudio.com/cdn/shop/files/ps-logo-icon.png
+https://us1.discourse-cdn.com/flex015/uploads/psaudio/original/3X/f/0/f0618c574cd33d419ec538679491374dc01db460.png
+
+This is the official 1000x1000 PNG of the blue sine-wave mark used as
+the PS Audio forum favicon and apple-touch-icon (the site icon browsers
+show in search suggestions). See .github/brand-src/SOURCE.md.
 
 The official mark is square, so logo.png is omitted; Home Assistant falls
-back to the icon. dark_icon variants are included so the black mark is not
-invisible on a dark UI.
+back to the icon. dark_icon uses the same official blue asset.
 """
 
 from __future__ import annotations
@@ -25,9 +25,10 @@ ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / ".github" / "brand-src"
 DEST = ROOT / "custom_components" / "psaudio_powerplant" / "brand"
 
+BLUE = SRC / "ps-audio-logo-blue.png.b64"
 SOURCES = {
-    "icon": SRC / "ps-logo-icon-black.png.b64",
-    "dark_icon": SRC / "ps-logo-icon.png.b64",
+    "icon": BLUE,
+    "dark_icon": BLUE,
 }
 
 
@@ -37,8 +38,8 @@ def load_source(path: Path) -> Image.Image:
 
 
 def fit_square(im: Image.Image, size: int) -> Image.Image:
-    # The official assets already fill a square canvas (rounded square to the
-    # edges), so they are not trimmed further.
+    # The official asset already fills a square canvas (rounded square
+    # with a transparent wave cutout), so it is not trimmed further.
     if im.size != (size, size):
         im = im.resize((size, size), Image.Resampling.LANCZOS)
     return im

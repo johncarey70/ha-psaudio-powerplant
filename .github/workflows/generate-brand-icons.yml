@@ -34,5 +34,5 @@ jobs:
             echo "Brand icons are already up to date."
             exit 0
           fi
-          git commit -m "Replace generated brand icons with official PS Audio logo"
+          git commit -m "Replace generated brand icons with official PS Audio blue logo"
           git push
