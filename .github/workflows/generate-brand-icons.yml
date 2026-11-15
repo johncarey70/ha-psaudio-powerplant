@@ -1,0 +1,38 @@
+name: Generate brand icons
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/scripts/make_brand_icons.py
+      - .github/workflows/generate-brand-icons.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate icons
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 .github/scripts/make_brand_icons.py
+
+      - name: Commit icons
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add custom_components/psaudio_powerplant/brand/icon.png \
+                  custom_components/psaudio_powerplant/brand/icon@2x.png
+          if git diff --cached --quiet; then
+            echo "Brand icons are already up to date."
+            exit 0
+          fi
+          git commit -m "Add HACS brand icons"
+          git push
